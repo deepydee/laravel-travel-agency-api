@@ -15,6 +15,11 @@ class Travel extends Model
 
     protected $table = 'travels';
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     protected $fillable = [
         'is_public',
         'slug',
@@ -22,6 +27,8 @@ class Travel extends Model
         'description',
         'number_of_days',
     ];
+
+    const PER_PAGE = 10;
 
     public function tours(): HasMany
     {
