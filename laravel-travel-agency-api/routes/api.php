@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\v1\TourController;
 use App\Http\Controllers\API\v1\TravelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::apiResource('travels', TravelController::class);
+Route::get('tours/{travel}', [TourController::class, 'index']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

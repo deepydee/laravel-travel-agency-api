@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Travel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,16 @@ class TourFactory extends Factory
      */
     public function definition(): array
     {
+        $days = rand(6, 21);
+        $startDate = fake()->dateTimeBetween('next Monday', 'next Monday +6 months');
+        $endDate = fake()->dateTimeBetween($startDate, $startDate->format('Y-m-d H:i:s')." +$days days");
+
         return [
-            //
+            'travel_id' => Travel::inRandomOrder()->first()->id,
+            'name' => fake()->sentence(),
+            'starting_date' => $startDate,
+            'ending_date' => $endDate,
+            'price' => rand(1000, 100000),
         ];
     }
 }
