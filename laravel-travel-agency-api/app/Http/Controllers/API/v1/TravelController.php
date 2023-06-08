@@ -7,31 +7,21 @@ use App\Http\Resources\TravelResource;
 use App\Models\Travel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TravelController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): AnonymousResourceCollection
     {
         $perPage = $request->per_page ?? Travel::PER_PAGE;
 
         $travels = Travel::where('is_public', true)
             ->paginate($perPage);
 
-        return response()
-            ->json([
-                'data' => TravelResource::collection($travels),
-                'meta' => [
-                    'current_page' => $travels->currentPage(),
-                    'from' => $travels->firstItem(),
-                    'to' => $travels->lastItem(),
-                    'last_page' => $travels->lastPage(),
-                    'per_page' => $perPage,
-                ]
-            ]);
+        return TravelResource::collection($travels);
     }
 
     /**
