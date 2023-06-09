@@ -17,12 +17,13 @@ class TourFactory extends Factory
      */
     public function definition(): array
     {
+        $travelsCount = Travel::pluck('id')->toArray();
         $days = rand(6, 21);
         $startDate = fake()->dateTimeBetween('next Monday', 'next Monday +6 months');
         $endDate = fake()->dateTimeBetween($startDate, $startDate->format('Y-m-d H:i:s')." +$days days");
 
         return [
-            'travel_id' => Travel::inRandomOrder()->first()->id,
+            'travel_id' => fake()->randomElement($travelsCount), //Travel::inRandomOrder()->value('id'),
             'name' => fake()->sentence(),
             'starting_date' => $startDate,
             'ending_date' => $endDate,
