@@ -27,10 +27,10 @@ class TourController extends Controller
                 $query->where('price', '<=', $request->priceTo * 100);
             })
             ->when($request->dateFrom, function ($query) use ($request) {
-                $query->whereDate('starting_date', '>=', $request->dateFrom);
+                $query->where('starting_date', '>=', $request->dateFrom);
             })
             ->when($request->dateTo, function ($query) use ($request) {
-                $query->whereDate('starting_date', '<=', $request->dateTo);
+                $query->where('starting_date', '<=', $request->dateTo);
             })
             ->oldest('starting_date');
 
