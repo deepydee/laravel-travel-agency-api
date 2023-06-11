@@ -17,20 +17,20 @@ class TourController extends Controller
         $sortDirection = $request->sortDirection ?? 'asc';
 
         $tours = $travel->tours()
-            ->when($request->has('sortByPrice'), function ($query) use ($sortDirection) {
-                return $query->orderBy('price', $sortDirection);
+            ->when($request->sortBy, function ($query) use ($sortDirection, $request) {
+                $query->orderBy($request->sortBy, $sortDirection);
             })
-            ->when($request->has('priceFrom'), function ($query) use ($request) {
-                return $query->where('price', '>=', $request->priceFrom * 100);
+            ->when($request->priceFrom, function ($query) use ($request) {
+                $query->where('price', '>=', $request->priceFrom * 100);
             })
-            ->when($request->has('priceTo'), function ($query) use ($request) {
-                return $query->where('price', '<=', $request->priceTo * 100);
+            ->when($request->priceTo, function ($query) use ($request) {
+                $query->where('price', '<=', $request->priceTo * 100);
             })
-            ->when($request->has('dateFrom'), function ($query) use ($request) {
-                return $query->whereDate('starting_date', '>=', $request->dateFrom);
+            ->when($request->dateFrom, function ($query) use ($request) {
+                $query->whereDate('starting_date', '>=', $request->dateFrom);
             })
-            ->when($request->has('dateTo'), function ($query) use ($request) {
-                return $query->whereDate('starting_date', '<=', $request->dateTo);
+            ->when($request->dateTo, function ($query) use ($request) {
+                $query->whereDate('starting_date', '<=', $request->dateTo);
             })
             ->oldest('starting_date');
 
