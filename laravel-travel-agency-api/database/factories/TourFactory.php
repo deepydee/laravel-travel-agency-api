@@ -27,7 +27,7 @@ class TourFactory extends Factory
             'name' => fake()->sentence(),
             'starting_date' => $startDate,
             'ending_date' => $endDate,
-            'price' => rand(1000, 100000),
+            'price' => fake()->randomFloat(2, 10, 999),
         ];
     }
 }
