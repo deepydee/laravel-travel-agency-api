@@ -16,7 +16,7 @@ class TourController extends Controller
         $perPage = $request->per_page ?? Tour::PER_PAGE;
         $sortDirection = $request->sortDirection ?? 'asc';
 
-        $tours = Tour::query()->where('travel_id', $travel->id)
+        $tours = $travel->tours()
             ->when($request->has('sortByPrice'), function ($query) use ($sortDirection) {
                 return $query->orderBy('price', $sortDirection);
             })

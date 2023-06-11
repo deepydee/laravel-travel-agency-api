@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::apiResource('travels', TravelController::class);
-Route::get('tours/{travel}', [TourController::class, 'index']);
+Route::get('travels/{travel}/tours', [TourController::class, 'index']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
