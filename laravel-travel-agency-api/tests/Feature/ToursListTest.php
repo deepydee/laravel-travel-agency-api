@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Role;
 use App\Models\Tour;
 use App\Models\Travel;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -205,5 +207,72 @@ class ToursListTest extends TestCase
 
         $response = $this->getJson('/api/v1/travels/' . $travel->slug . '/tours?priceFrom=abcde');
         $response->assertStatus(422);
+    }
+
+    public function test_user_cannot_create_travel_without_authentication(): void
+    {
+        $endpoint = '/api/v1/travels/';
+
+        $data = [
+            'is_public' => 1,
+            'name' => 'Travel name',
+            'description' => 'Travel description',
+            'number_of_days' => 7,
+        ];
+
+        $this->post($endpoint, $data, ['Accept' => 'application/json'])
+             ->assertUnauthorized();
+    }
+
+    public function test_authenticated_user_cannot_create_travel_without_ability(): void
+    {
+        $endpoint = '/api/v1/travels/';
+
+        $data = [
+            'is_public' => 1,
+            'name' => 'Travel name',
+            'description' => 'Travel description',
+            'number_of_days' => 7,
+        ];
+
+        $user = User::factory()->create();
+        $role = Role::create(['name' => 'editor']);
+        $user->roles()->attach($role->id);
+
+        $token = $user->createToken('editor-access', ['travels:update'])
+            ->plainTextToken;
+
+        $this->post($endpoint, $data, [
+            'Accept' => 'application/json',
+            'Authorization'=>'Bearer '.$token,
+            'Accept' => 'application/json',
+            ])
+            ->assertStatus(403);
+    }
+
+    public function test_authenticated_user_can_create_travel_with_ability(): void
+    {
+        $endpoint = '/api/v1/travels/';
+
+        $data = [
+            'is_public' => 1,
+            'name' => 'Travel name',
+            'description' => 'Travel description',
+            'number_of_days' => 7,
+        ];
+
+        $user = User::factory()->create();
+        $role = Role::create(['name' => 'admin']);
+        $user->roles()->attach($role->id);
+
+        $token = $user->createToken('editor-access', ['travels:create'])
+            ->plainTextToken;
+
+        $this->post($endpoint, $data, [
+            'Accept' => 'application/json',
+            'Authorization'=>'Bearer '.$token,
+            'Accept' => 'application/json',
+            ])
+            ->assertStatus(201);
     }
 }

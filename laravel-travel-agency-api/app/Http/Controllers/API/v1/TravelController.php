@@ -3,18 +3,23 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTravelsRequest;
 use App\Http\Resources\TravelResource;
 use App\Models\Travel;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TravelController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:sanctum')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(Request $request): ResourceCollection
     {
         $perPage = $request->per_page ?? Travel::PER_PAGE;
 
@@ -27,15 +32,17 @@ class TravelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTravelsRequest $request): JsonResource
     {
-        //
+        $travel = Travel::create($request->validated());
+
+        return new TravelResource($travel);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Travel $travel)
+    public function show(Travel $travel): JsonResource
     {
         return new TravelResource($travel);
     }
