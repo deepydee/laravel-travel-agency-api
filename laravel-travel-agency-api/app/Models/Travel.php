@@ -15,10 +15,10 @@ class Travel extends Model
 
     protected $table = 'travels';
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName(): string
+    // {
+    //     return 'slug';
+    // }
 
     protected $fillable = [
         'is_public',
