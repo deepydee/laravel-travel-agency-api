@@ -34,6 +34,6 @@ class TourController extends Controller
             })
             ->oldest('starting_date');
 
-        return(TourResource::collection($tours->paginate($perPage)));
+        return TourResource::collection($tours->paginate($perPage));
     }
 }

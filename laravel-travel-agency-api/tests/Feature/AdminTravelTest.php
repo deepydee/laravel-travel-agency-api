@@ -7,7 +7,6 @@ use App\Models\Travel;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AdminTravelTest extends TestCase
@@ -62,12 +61,12 @@ class AdminTravelTest extends TestCase
         $user->roles()->attach(Role::where('name', 'editor')->value('id'));
         $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/' . $travel->id, [
+        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id, [
             'name' => 'Travel name',
         ]);
         $response->assertStatus(422);
 
-        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/' . $travel->id, [
+        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id, [
             'name' => 'Travel name updated',
             'is_public' => 1,
             'description' => 'Some description',
