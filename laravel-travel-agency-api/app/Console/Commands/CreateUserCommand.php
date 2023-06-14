@@ -57,34 +57,13 @@ class CreateUserCommand extends Command
             return;
         }
 
-        $issuedTokenMessage = '';
-
-        DB::transaction(function () use ($user, $role, &$issuedTokenMessage) {
+        DB::transaction(function () use ($user, $role) {
             $user['password'] = bcrypt($user['password']);
             $newUser = User::create($user);
             $newUser->roles()->attach($role->id);
-
-            switch ($role->name) {
-                case 'admin':
-                    $token = $newUser->createToken('admin-access', [
-                        'travels:create',
-                        'travels:update',
-                        'travels:destroy',
-                        'tours:create',
-                        'tours:update',
-                        'tours:destroy',
-                    ]);
-                    break;
-
-                case 'editor':
-                    $token = $newUser->createToken('editor-access', ['travels:update',]);
-                    break;
-            }
-
-            $issuedTokenMessage ="Don't forget your access token: {$token->plainTextToken}";
         });
 
-        $this->info("User {$user['email']} created successfully. $issuedTokenMessage");
+        $this->info("User {$user['email']} created successfully.");
 
         return 0;
     }
