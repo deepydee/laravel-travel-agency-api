@@ -1,0 +1,223 @@
+name: 'Public endpoints'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/travels
+    metadata:
+      groupName: 'Public endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET Travels'
+      description: 'Returns paginated list of travels.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      page:
+        name: page
+        description: 'Page number.'
+        required: false
+        example: 1
+        type: integer
+        custom: []
+      per_page:
+        name: per_page
+        description: 'Show entities per page.'
+        required: false
+        example: 10
+        type: integer
+        custom: []
+    cleanQueryParameters:
+      page: 1
+      per_page: 10
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":"9958e389-5edf-48eb-8ecd-e058985cf3ce","name":"First travel", ...}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/travels/{id}'
+    metadata:
+      groupName: 'Public endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET Travel'
+      description: 'Returns single travel.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the travel.'
+        required: true
+        example: 9965e77d-b3b2-488d-8cf4-df1a1363a958
+        type: string
+        custom: []
+      travel_uuid:
+        name: travel_uuid
+        description: 'Travel uuid.'
+        required: false
+        example: '"9965e77d-c264-4988-b9f5-8a50b08cdd2a"'
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: 9965e77d-b3b2-488d-8cf4-df1a1363a958
+      travel_uuid: '"9965e77d-c264-4988-b9f5-8a50b08cdd2a"'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":"9965e77d-c264-4988-b9f5-8a50b08cdd2a","slug":"molestiae-alias-ab-et-quo-molestiae-reprehenderit-consequatur-consectetur","name":"Impressive1234","description":"Description","number_of_days":14,"number_of_nights":13}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/travels/{travel_slug}/tours'
+    metadata:
+      groupName: 'Public endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET Travel Tours'
+      description: 'Returns paginated list of tours by travel slug.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      travel_slug:
+        name: travel_slug
+        description: 'Travel slug.'
+        required: false
+        example: '"first-travel"'
+        type: string
+        custom: []
+    cleanUrlParameters:
+      travel_slug: '"first-travel"'
+    queryParameters:
+      page:
+        name: page
+        description: 'Page number.'
+        required: false
+        example: 1
+        type: integer
+        custom: []
+      per_page:
+        name: per_page
+        description: 'Show entities per page.'
+        required: false
+        example: 10
+        type: integer
+        custom: []
+    cleanQueryParameters:
+      page: 1
+      per_page: 10
+    bodyParameters:
+      sortBy:
+        name: sortBy
+        description: ''
+        required: false
+        example: '"price"'
+        type: string.
+        custom: []
+      sortDirection:
+        name: sortDirection
+        description: 'Must be one of <code>asc</code> or <code>desc</code>.'
+        required: false
+        example: asc
+        type: string
+        custom: []
+      priceFrom:
+        name: priceFrom
+        description: ''
+        required: false
+        example: '"123.45"'
+        type: number.
+        custom: []
+      priceTo:
+        name: priceTo
+        description: ''
+        required: false
+        example: '"234.56"'
+        type: number.
+        custom: []
+      dateFrom:
+        name: dateFrom
+        description: ''
+        required: false
+        example: '"2023-06-01"'
+        type: date.
+        custom: []
+      dateTo:
+        name: dateTo
+        description: ''
+        required: false
+        example: '"2023-07-01"'
+        type: date.
+        custom: []
+      sortOrder:
+        name: sortOrder
+        description: ''
+        required: false
+        example: '"asc" or "desc"'
+        type: string.
+        custom: []
+    cleanBodyParameters:
+      sortBy: '"price"'
+      sortDirection: asc
+      priceFrom: '"123.45"'
+      priceTo: '"234.56"'
+      dateFrom: '"2023-06-01"'
+      dateTo: '"2023-07-01"'
+      sortOrder: '"asc" or "desc"'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":"9958e389-5edf-48eb-8ecd-e058985cf3ce","name":"Tour on Sunday","starting_date":"2023-06-11","ending_date":"2023-06-16", ...}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

@@ -31,7 +31,3 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('auth/login', LoginController::class);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
