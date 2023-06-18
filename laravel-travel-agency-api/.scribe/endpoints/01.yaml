@@ -1,0 +1,241 @@
+name: 'Admin endpoints'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/travels
+    metadata:
+      groupName: 'Admin endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST Travel'
+      description: 'Creates a new Travel record.'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      is_public:
+        name: is_public
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: true
+        example: magni
+        type: string
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: true
+        example: 'Sit facere velit qui rerum ut qui rem.'
+        type: string
+        custom: []
+      number_of_days:
+        name: number_of_days
+        description: 'Must be at least 1.'
+        required: true
+        example: 80
+        type: integer
+        custom: []
+    cleanBodyParameters:
+      is_public: false
+      name: magni
+      description: 'Sit facere velit qui rerum ut qui rem.'
+      number_of_days: 80
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":"996a36ca-2693-4901-9c55-7136e68d81d5","name":"My new travel 234","slug":"my-new-travel-234", ...}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: '{"message":"The name has already been taken.","errors":{"name":["The name has already been taken."]}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/travels/{travel_id}/tours'
+    metadata:
+      groupName: 'Admin endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST Tour'
+      description: 'Creates new Tour record.'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      travel_id:
+        name: travel_id
+        description: 'The ID of the travel.'
+        required: true
+        example: 9965e77d-b3b2-488d-8cf4-df1a1363a958
+        type: string
+        custom: []
+    cleanUrlParameters:
+      travel_id: 9965e77d-b3b2-488d-8cf4-df1a1363a958
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: explicabo
+        type: string
+        custom: []
+      starting_date:
+        name: starting_date
+        description: 'Must be a valid date.'
+        required: true
+        example: '2023-06-18T16:02:26'
+        type: string
+        custom: []
+      ending_date:
+        name: ending_date
+        description: 'Must be a valid date. Must be a date after <code>starting_date</code>.'
+        required: true
+        example: '2033-08-25'
+        type: string
+        custom: []
+      price:
+        name: price
+        description: ''
+        required: true
+        example: 22665.65
+        type: number
+        custom: []
+    cleanBodyParameters:
+      name: explicabo
+      starting_date: '2023-06-18T16:02:26'
+      ending_date: '2033-08-25'
+      price: 22665.65
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":"9970f432-99a4-4e60-b684-ba613b4b18d2","name":"Impressive1234!!","starting_date":"2023-07-01","ending_date":"2023-08-01","price":"3,000.00"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: '{"message":"The name has already been taken. (and 2 more errors)","errors":{"name":["The name has already been taken."],"description":["The description field is required."],"number_of_days":["The number of days field is required."]}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/v1/admin/travels/{travel_id}'
+    metadata:
+      groupName: 'Admin endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'PUT Travel'
+      description: 'Updates new Travel record.'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      travel_id:
+        name: travel_id
+        description: 'The ID of the travel.'
+        required: true
+        example: 9965e77d-b3b2-488d-8cf4-df1a1363a958
+        type: string
+        custom: []
+    cleanUrlParameters:
+      travel_id: 9965e77d-b3b2-488d-8cf4-df1a1363a958
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      is_public:
+        name: is_public
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: true
+        example: minima
+        type: string
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: true
+        example: 'Incidunt quia molestiae sit est sint vel.'
+        type: string
+        custom: []
+      number_of_days:
+        name: number_of_days
+        description: 'Must be at least 1.'
+        required: true
+        example: 53
+        type: integer
+        custom: []
+    cleanBodyParameters:
+      is_public: false
+      name: minima
+      description: 'Incidunt quia molestiae sit est sint vel.'
+      number_of_days: 53
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":"996a36ca-2693-4901-9c55-7136e68d81d5","name":"My new travel 234", ...}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: '{"message":"The name has already been taken.","errors":{"name":["The name has already been taken."]}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
